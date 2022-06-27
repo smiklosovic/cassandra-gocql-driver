@@ -416,7 +416,7 @@ func (s *Session) hostInfoFromMap(row map[string]interface{}, host *HostInfo) (*
 	const assertErrorMsg = "Assertion failed for %s"
 	var ok bool
 
-	s.logger.Printf("row: %v, host: %v", row, &host)
+	s.logger.Printf("row: %v, host: %v", row, host)
 
 	// Default to our connected port if the cluster doesn't have port information
 	for key, value := range row {
