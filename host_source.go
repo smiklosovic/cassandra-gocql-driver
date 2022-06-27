@@ -475,12 +475,24 @@ func (s *Session) hostInfoFromMap(row map[string]interface{}, host *HostInfo) (*
 				return nil, fmt.Errorf(assertErrorMsg, "rpc_address")
 			}
 			host.rpcAddress = net.ParseIP(ip)
+		case "native_address":
+			ip, ok := value.(string)
+			if !ok {
+				return nil, fmt.Errorf(assertErrorMsg, "native_address")
+			}
+			host.rpcAddress = net.ParseIP(ip)
 		case "listen_address":
 			ip, ok := value.(string)
 			if !ok {
 				return nil, fmt.Errorf(assertErrorMsg, "listen_address")
 			}
 			host.listenAddress = net.ParseIP(ip)
+		case "native_port":
+			native_port, ok := value.(int)
+			if !ok {
+				return nil, fmt.Errorf(assertErrorMsg, "native_port")
+			}
+			host.port = native_port
 		case "workload":
 			host.workload, ok = value.(string)
 			if !ok {
@@ -524,7 +536,11 @@ func (r *ringDescriber) getClusterPeerInfo() ([]*HostInfo, error) {
 	var hosts []*HostInfo
 	iter := r.session.control.withConnHost(func(ch *connHost) *Iter {
 		hosts = append(hosts, ch.host)
-		return ch.conn.query(context.TODO(), "SELECT * FROM system.peers")
+		if ch.host.version.AtLeast(4, 0, 0) {
+			return ch.conn.query(context.TODO(), "SELECT * FROM system.peers_v2")
+		} else {
+			return ch.conn.query(context.TODO(), "SELECT * FROM system.peers")
+		}
 	})
 
 	if iter == nil {
@@ -591,7 +607,11 @@ func (r *ringDescriber) getHostInfo(ip net.IP, port int) (*HostInfo, error) {
 			return nil
 		}
 
-		return ch.conn.query(context.TODO(), "SELECT * FROM system.peers")
+		if ch.host.version.AtLeast(4, 0, 0) {
+			return ch.conn.query(context.TODO(), "SELECT * FROM system.peers_v2")
+		} else {
+			return ch.conn.query(context.TODO(), "SELECT * FROM system.peers")
+		}
 	})
 
 	if iter != nil {
