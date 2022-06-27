@@ -489,7 +489,7 @@ func (pool *hostConnPool) fillingStopped(err error) {
 	pool.mu.Unlock()
 
 	// if we errored and the size is now zero, make sure the host is marked as down
-	// see https://github.com/gocql/gocql/issues/1614
+	// see https://github.com/smiklosovic/gocql/issues/1614
 	if gocqlDebug {
 		pool.logger.Printf("gocql: conns of pool after stopped %q: %v\n", host.ConnectAddress(), count)
 	}

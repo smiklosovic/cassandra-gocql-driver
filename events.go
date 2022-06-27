@@ -165,7 +165,7 @@ func (s *Session) handleNodeEvent(frames []frame) {
 		}
 
 		// ignore events we received if they were disabled
-		// see https://github.com/gocql/gocql/issues/1591
+		// see https://github.com/smiklosovic/gocql/issues/1591
 		switch f.change {
 		case "NEW_NODE":
 			if !s.cfg.Events.DisableTopologyEvents {

@@ -2,7 +2,7 @@ package gocql_test
 
 import (
 	"fmt"
-	"github.com/gocql/gocql"
+	"github.com/smiklosovic/gocql"
 	"log"
 )
 
@@ -28,7 +28,7 @@ func Example_nulls() {
 	scanner := session.Query(`SELECT id, value FROM stringvals`).Iter().Scanner()
 	for scanner.Next() {
 		var (
-			id int32
+			id  int32
 			val *string
 		)
 		err := scanner.Scan(&id, &val)

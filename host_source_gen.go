@@ -1,3 +1,4 @@
+//go:build genhostinfo
 // +build genhostinfo
 
 package main
@@ -7,7 +8,7 @@ import (
 	"reflect"
 	"sync"
 
-	"github.com/gocql/gocql"
+	"github.com/smiklosovic/gocql"
 )
 
 func gen(clause, field string) {
