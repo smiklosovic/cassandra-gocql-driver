@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"log"
 	"net"
 	"strconv"
 	"strings"
@@ -548,6 +549,7 @@ func (r *ringDescriber) getClusterPeerInfo() ([]*HostInfo, error) {
 
 	for _, row := range rows {
 		// extract all available info about the peer
+		log.Printf("getting info from getClusterPeerInfo")
 		host, err := r.session.hostInfoFromMap(row, &HostInfo{port: r.session.cfg.Port})
 		if err != nil {
 			return nil, err
@@ -610,6 +612,7 @@ func (r *ringDescriber) getHostInfo(ip net.IP, port int) (*HostInfo, error) {
 		}
 
 		for _, row := range rows {
+			log.Printf("getting info from getHostInfo")
 			h, err := r.session.hostInfoFromMap(row, &HostInfo{port: port})
 			if err != nil {
 				return nil, err
