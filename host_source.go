@@ -477,6 +477,12 @@ func (s *Session) hostInfoFromMap(row map[string]interface{}, host *HostInfo) (*
 				return nil, fmt.Errorf(assertErrorMsg, "rpc_address")
 			}
 			host.rpcAddress = net.ParseIP(ip)
+		case "rpc_port":
+			rpc_port, ok := value.(int)
+			if !ok {
+				return nil, fmt.Errorf(assertErrorMsg, "rpc_port")
+			}
+			host.port = rpc_port
 		case "listen_address":
 			ip, ok := value.(string)
 			if !ok {
