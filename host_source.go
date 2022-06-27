@@ -416,6 +416,8 @@ func (s *Session) hostInfoFromMap(row map[string]interface{}, host *HostInfo) (*
 	const assertErrorMsg = "Assertion failed for %s"
 	var ok bool
 
+	s.logger.Printf("row: %v", row)
+
 	// Default to our connected port if the cluster doesn't have port information
 	for key, value := range row {
 		switch key {
@@ -512,6 +514,7 @@ func (s *Session) hostInfoFromMap(row map[string]interface{}, host *HostInfo) (*
 		// Not sure what the port field will be called until the JIRA issue is complete
 	}
 
+	s.logger.Printf("going to translate %v:%d", host.ConnectAddress(), host.port)
 	ip, port := s.cfg.translateAddressPort(host.ConnectAddress(), host.port)
 	host.connectAddress = ip
 	host.port = port
