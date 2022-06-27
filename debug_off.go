@@ -3,4 +3,4 @@
 
 package gocql
 
-const gocqlDebug = true
+const gocqlDebug = false

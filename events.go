@@ -219,9 +219,9 @@ func (s *Session) addNewNode(ip net.IP, port int) {
 }
 
 func (s *Session) handleNewNode(ip net.IP, port int) {
-	if gocqlDebug {
-		s.logger.Printf("gocql: Session.handleNewNode: %s:%d\n", ip.String(), port)
-	}
+	//if gocqlDebug {
+	s.logger.Printf("gocql: Session.handleNewNode: %s:%d\n", ip.String(), port)
+	//}
 
 	ip, port = s.cfg.translateAddressPort(ip, port)
 
@@ -235,9 +235,9 @@ func (s *Session) handleNewNode(ip net.IP, port int) {
 }
 
 func (s *Session) handleRemovedNode(ip net.IP, port int) {
-	if gocqlDebug {
-		s.logger.Printf("gocql: Session.handleRemovedNode: %s:%d\n", ip.String(), port)
-	}
+	//if gocqlDebug {
+	s.logger.Printf("gocql: Session.handleRemovedNode: %s:%d\n", ip.String(), port)
+	//}
 
 	ip, port = s.cfg.translateAddressPort(ip, port)
 
@@ -260,9 +260,9 @@ func (s *Session) handleRemovedNode(ip net.IP, port int) {
 }
 
 func (s *Session) handleNodeUp(eventIp net.IP, eventPort int) {
-	if gocqlDebug {
-		s.logger.Printf("gocql: Session.handleNodeUp: %s:%d\n", eventIp.String(), eventPort)
-	}
+	//if gocqlDebug {
+	s.logger.Printf("gocql: Session.handleNodeUp: %s:%d\n", eventIp.String(), eventPort)
+	//}
 
 	ip, port := s.cfg.translateAddressPort(eventIp, eventPort)
 
