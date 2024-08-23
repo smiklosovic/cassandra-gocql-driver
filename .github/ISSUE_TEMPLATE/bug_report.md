@@ -1,0 +1,40 @@
+---
+name: Bug report
+about: Create a report to help us improve
+title: ''
+labels: bug
+assignees: ''
+
+---
+
+**It is strongly preferable to create an issue in [Apache JIRA Cassandra project](https://issues.apache.org/jira/projects/CASSANDRA/issues/).**
+
+Please answer these questions before submitting your issue. Thanks!
+
+### What version of Cassandra are you using?
+
+
+### What version of Gocql are you using?
+
+
+### What version of Go are you using?
+
+
+### What did you do?
+
+
+### What did you expect to see?
+
+
+### What did you see instead?
+
+---
+
+If you are having connectivity related issues please share the following additional information
+
+### Describe your Cassandra cluster
+please provide the following information
+
+- output of `nodetool status`
+- output of `SELECT peer, rpc_address FROM system.peers`
+- rebuild your application with the `gocql_debug` tag and post the output
